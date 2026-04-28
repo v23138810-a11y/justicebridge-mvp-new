@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>JusticeBridge MVP</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">JusticeBridge MVP</p>
+          <h1 id="pageTitle">Resolve legal issues in minutes</h1>
+        </div>
+      </header>
+
+      <main class="app-main">
+        <div class="global-notice">
+          This tool provides structured assistance, not legal advice.
+        </div>
+
+        <section id="homeScreen" class="page-screen home-screen" aria-label="Home dashboard">
+          <div class="hero-panel">
+            <div class="hero-copy">
+              <p class="eyebrow">Built for real consumer disputes</p>
+              <h2>Not getting a response? Take real action.</h2>
+              <p>Turn your problem into a complaint companies can't ignore.</p>
+              <p class="hero-punch">Stop chasing support. Make them respond.</p>
+              <div class="hero-actions">
+                <a class="primary-button hero-cta" href="/complaint" data-route="complaint">Start Taking Action</a>
+                <a class="secondary-button hero-cta" href="/complaint" data-route="complaint">Did support ignore you?</a>
+              </div>
+            </div>
+            <div class="trust-panel" aria-label="Trust points">
+              <span>Formatted for official submission</span>
+              <span>Built for real consumer disputes</span>
+              <span>This tool provides structured assistance, not legal advice</span>
+            </div>
+          </div>
+
+          <div class="feature-grid">
+            <a class="feature-card accent-consumer" href="/complaint" data-route="complaint">
+              <span class="feature-icon" aria-hidden="true">&#9878;</span>
+              <strong>File Complaint</strong>
+              <span>Don't let your money go without a fight.</span>
+            </a>
+            <a class="feature-card accent-document" href="/document" data-route="document">
+              <span class="feature-icon" aria-hidden="true">&#128196;</span>
+              <strong>Explain My Document</strong>
+              <span>Understand what matters before you respond.</span>
+            </a>
+            <a class="feature-card accent-rti" href="/rti" data-route="rti">
+              <span class="feature-icon" aria-hidden="true">&#128220;</span>
+              <strong>Create RTI</strong>
+              <span>Ask the right public office for clear information.</span>
+            </a>
+            <a class="feature-card accent-rights" href="/rights" data-route="rights">
+              <span class="feature-icon" aria-hidden="true">&#128161;</span>
+              <strong>Know Your Rights</strong>
+              <span>Know what to do next without legal jargon.</span>
+            </a>
+          </div>
+          <section class="action-strip" aria-label="Action message">
+            <p>Most complaints are ignored without follow-up.</p>
+            <strong>This complaint puts pressure on them to act.</strong>
+          </section>
+        </section>
+
+        <section id="complaintScreen" class="page-screen complaint-screen" aria-label="Complaint questions" hidden>
+          <div class="screen-heading complaint-heading">
+            <p class="eyebrow">File Complaint</p>
+            <h2>Don't let your money go without a fight.</h2>
+            <p>Answer 5 quick questions. JusticeBridge turns them into a structured complaint draft.</p>
+          </div>
+          <div class="step-shell">
+            <div class="step-meta">
+              <span id="progressText" class="progress-text">Step 1 of 5</span>
+              <span>Formatted for official submission</span>
+            </div>
+            <div class="progress-track" aria-hidden="true">
+              <span id="progressBar"></span>
+            </div>
+            <div id="questionPanel" class="question-panel" aria-live="polite"></div>
+          </div>
+          <form id="answerForm" class="answer-form">
+            <div id="inputMount"></div>
+            <button id="answerSubmitButton" class="primary-button" type="submit">Continue</button>
+          </form>
+          <div id="complaintLoading" class="loading-card" hidden>
+            <span class="spinner" aria-hidden="true"></span>
+            <strong>Generating your complaint...</strong>
+            <p>This complaint puts pressure on them to act.</p>
+          </div>
+        </section>
+
+        <section id="outputScreen" class="page-screen output-screen" aria-label="Generated complaint" hidden>
+          <div class="result-header">
+            <div>
+              <p class="eyebrow">Ready to use</p>
+              <h2>Your consumer complaint</h2>
+              <p>This complaint puts pressure on them to act.</p>
+            </div>
+            <button id="startOverButton" class="ghost-button" type="button">Start over</button>
+          </div>
+
+          <section class="urgency-panel">
+            <p>Most users don’t get a response without follow-up.</p>
+            <strong>Still ignored? Escalate this now.</strong>
+          </section>
+
+          <div id="complaintPreview" class="draft-preview" aria-label="Generated complaint text"></div>
+          <textarea id="complaintText" class="draft-box visually-hidden" readonly aria-label="Generated complaint plain text"></textarea>
+
+          <div class="button-row three">
+            <button id="copyButton" class="secondary-button" type="button">Copy</button>
+            <button id="pdfButton" class="secondary-button" type="button">Download PDF</button>
+            <button id="escalateButton" class="primary-button escalate-button" type="button">Escalate Now</button>
+          </div>
+
+          <section class="guidance-panel" aria-label="Submission guidance">
+            <p class="eyebrow">Next Steps</p>
+            <h2>Submit it on the official portal</h2>
+            <a class="portal-link" href="https://consumerhelpline.gov.in" target="_blank" rel="noreferrer">
+              Open consumerhelpline.gov.in
+            </a>
+            <ol class="steps">
+              <li>Go to official portal</li>
+              <li>Login</li>
+              <li>Paste generated complaint</li>
+              <li>Upload proof</li>
+              <li>Submit</li>
+            </ol>
+            <button id="markSubmittedButton" class="secondary-button full-width" type="button">Mark submitted</button>
+          </section>
+
+          <section class="followup-panel" aria-label="Follow up">
+            <h2>Still ignored? Escalate this now.</h2>
+            <textarea id="escalationText" class="draft-box compact" readonly aria-label="Escalation complaint text" hidden></textarea>
+            <div id="escalationActions" class="button-row" hidden>
+              <button id="copyEscalationButton" class="primary-button" type="button">Copy escalation</button>
+              <button id="pdfEscalationButton" class="secondary-button" type="button">Download PDF</button>
+            </div>
+          </section>
+        </section>
+
+        <section id="documentScreen" class="page-screen feature-screen" aria-label="Explain my document" hidden>
+          <div class="screen-heading">
+            <p class="eyebrow">Explain My Document</p>
+            <h2>Understand a document in simple words</h2>
+            <p>Upload a PDF or image. This MVP uses basic text extraction and a simple rule-based summary.</p>
+          </div>
+          <form id="documentForm" class="stack-form">
+            <div class="field">
+              <label for="documentFile">Upload document</label>
+              <input id="documentFile" name="documentFile" type="file" accept=".pdf,.txt,image/*" required>
+              <p class="file-help">Files stay on this device. Images use placeholder extraction in this MVP.</p>
+            </div>
+            <div class="field">
+              <label for="documentQuestion">What do you want to understand? (optional)</label>
+              <textarea id="documentQuestion" name="documentQuestion" placeholder="Example: What does this notice ask me to do?"></textarea>
+            </div>
+            <button id="documentSubmitButton" class="primary-button" type="submit">Explain document</button>
+          </form>
+          <div id="documentOutput" class="structured-output" hidden>
+            <section class="output-card">
+              <h3>Simple Summary</h3>
+              <div id="documentSummary"></div>
+            </section>
+            <section class="output-card">
+              <h3>Key Points</h3>
+              <ul id="documentPoints"></ul>
+            </section>
+            <section class="output-card">
+              <h3>What You Should Do Next</h3>
+              <ol id="documentNext"></ol>
+            </section>
+          </div>
+        </section>
+
+        <section id="rtiScreen" class="page-screen feature-screen" aria-label="Create RTI application" hidden>
+          <div class="screen-heading">
+            <p class="eyebrow">RTI Generator</p>
+            <h2>Create an RTI application</h2>
+            <p>Describe the information you want. JusticeBridge will format it for the Public Information Officer.</p>
+          </div>
+          <form id="rtiForm" class="stack-form">
+            <div class="field">
+              <label for="rtiInformation">What information do you want?</label>
+              <textarea id="rtiInformation" required placeholder="Example: Please provide details of road repair work completed in Ward 12 during 2025."></textarea>
+            </div>
+            <div class="field">
+              <label for="rtiDepartment">Department (optional)</label>
+              <input id="rtiDepartment" type="text" placeholder="Example: Municipal Corporation">
+            </div>
+            <div class="field">
+              <label for="rtiLocation">Location</label>
+              <input id="rtiLocation" type="text" required placeholder="Example: Pune, Maharashtra">
+            </div>
+            <button id="rtiSubmitButton" class="primary-button" type="submit">Generate RTI</button>
+          </form>
+          <div id="rtiOutput" class="structured-output" hidden>
+            <div id="rtiPreview" class="draft-preview"></div>
+            <textarea id="rtiText" class="draft-box visually-hidden" readonly aria-label="Generated RTI application plain text"></textarea>
+            <div class="button-row">
+              <button id="copyRtiButton" class="primary-button" type="button">Copy RTI</button>
+              <button id="pdfRtiButton" class="secondary-button" type="button">Download PDF</button>
+            </div>
+            <section class="guidance-panel">
+              <p class="eyebrow">How to submit RTI</p>
+              <ol class="steps">
+                <li>Visit RTI portal</li>
+                <li>Fill details</li>
+                <li>Paste generated text</li>
+                <li>Pay fee</li>
+                <li>Submit</li>
+              </ol>
+            </section>
+          </div>
+        </section>
+
+        <section id="rightsScreen" class="page-screen feature-screen" aria-label="Know your rights" hidden>
+          <div class="screen-heading">
+            <p class="eyebrow">Know Your Rights</p>
+            <h2>Pick your issue</h2>
+            <p>Get short, clear information and safe next steps. This is structured assistance, not legal advice.</p>
+          </div>
+          <div class="choice-grid">
+            <button class="choice-button" type="button" data-rights="consumer">Consumer issue</button>
+            <button class="choice-button" type="button" data-rights="police">Police interaction</button>
+            <button class="choice-button" type="button" data-rights="tenant">Tenant issue</button>
+            <button class="choice-button" type="button" data-rights="salary">Salary/employer issue</button>
+          </div>
+          <div id="rightsOutput" class="structured-output" hidden>
+            <section class="output-card">
+              <h3>Your Rights</h3>
+              <ul id="rightsList"></ul>
+            </section>
+            <section class="output-card">
+              <h3>What to do now</h3>
+              <ol id="rightsSteps"></ol>
+            </section>
+            <section class="output-card warning-card">
+              <h3>What NOT to do</h3>
+              <ul id="rightsAvoid"></ul>
+            </section>
+          </div>
+        </section>
+
+        <section id="casesScreen" class="page-screen feature-screen" aria-label="My cases" hidden>
+          <div class="screen-heading">
+            <p class="eyebrow">My Cases</p>
+            <h2>Track local drafts</h2>
+            <p>Complaints are stored only in this browser using local storage.</p>
+          </div>
+          <div id="casesList" class="cases-list"></div>
+        </section>
+      </main>
+
+      <nav class="bottom-nav" aria-label="Primary navigation">
+        <a href="/" data-route="home"><span aria-hidden="true">&#8962;</span><strong>Home</strong></a>
+        <a href="/complaint" data-route="complaint"><span aria-hidden="true">&#9878;</span><strong>Complaint</strong></a>
+        <a href="/cases" data-route="cases"><span aria-hidden="true">&#128203;</span><strong>Cases</strong></a>
+      </nav>
+    </div>
+
+    <script src="/generator.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>

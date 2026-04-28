@@ -1,0 +1,10 @@
+{
+  "name": "justicebridge-mvp",
+  "version": "1.0.0",
+  "description": "Mobile-first MVP for generating simple Indian consumer complaint drafts.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "private": true
+}
